@@ -33,6 +33,28 @@ const SignUp = () => {
           <p className="auth-subtitle">Join the CircleTalk community today</p>
         </div>
 
+        <div className="signup-avatar-section">
+          <div className="signup-avatar-wrapper">
+            <img
+              src={formData.profilePic || '/avatar.png'}
+              alt="Avatar Preview"
+              className="signup-avatar-preview"
+            />
+            <label htmlFor="avatar-upload" className="signup-avatar-upload-btn">
+              <Camera size={18} />
+              <input
+                type="file"
+                id="avatar-upload"
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={isSigningUp}
+              />
+            </label>
+          </div>
+          <p className="signup-avatar-hint text-xs mt-2 opacity-60">Upload a profile picture (optional)</p>
+        </div>
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label className="form-label">Full Name</label>

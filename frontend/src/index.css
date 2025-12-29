@@ -616,6 +616,46 @@ main {
     color: var(--primary-green);
 }
 
+/* Signup Avatar Uploader */
+.signup-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.signup-avatar-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.signup-avatar-preview {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-green);
+    background: var(--bg-color);
+}
+
+.signup-avatar-upload-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-green);
+    color: white;
+    padding: 0.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.signup-avatar-upload-btn:hover {
+    transform: scale(1.1);
+}
+
 /* Auth Pages Style */
 .auth-container {
     display: flex;
@@ -1058,12 +1098,15 @@ input:checked+.slider:before {
 
     /* Navbar Mobile Optimizations */
     .navbar {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
     }
 
-    .nav-logo .logo-text {
-        display: none;
-        /* Hide text, keep icon if any */
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        padding: 0.4rem;
     }
 
     /* Message UI Mobile Tweaks */
@@ -1077,56 +1120,77 @@ input:checked+.slider:before {
 
     /* Header Mobile Optimization */
     .chat-header {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .sidebar-header {
+        padding: 1rem;
+    }
+
+    .sidebar-title {
+        margin-bottom: 0.75rem;
     }
 
     /* Input Mobile Optimization */
     .chat-input-area {
-        padding: 0.75rem 1rem;
+        padding: 0.6rem 0.75rem;
         background: var(--header-bg);
         border-top: 1px solid var(--border-color);
     }
 
     .input-wrapper {
-        gap: 0.5rem;
-        padding: 0.4rem 0.8rem;
+        gap: 0.4rem;
+        padding: 0.35rem 0.7rem;
     }
 
     /* Auth Pages Mobile Fix */
     .auth-container {
         padding: 0;
         background-color: var(--sidebar-bg);
-        /* Use solid color on mobile */
     }
 
     .auth-card {
         max-width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         border-radius: 0;
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1.25rem;
         box-shadow: none;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
+        /* Start from top on mobile */
+        padding-top: 4rem;
+    }
+
+    .auth-logo-wrapper {
+        margin-bottom: 1rem;
     }
 
     /* Profile & Settings Mobile Fix */
     .profile-page,
     .settings-page {
-        padding: 1rem;
+        padding: 1rem 0.5rem;
     }
 
     .profile-container,
     .settings-container {
-        padding: 1.5rem;
-        border-radius: 16px;
+        padding: 1.25rem 1rem;
+        border-radius: 12px;
     }
 
     .fab-new-chat {
-        bottom: 1.5rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
+        bottom: 2rem;
+        /* Move up slightly to avoid mobile gesture bars */
+        right: 1.25rem;
+        width: 54px;
+        height: 54px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .no-users {
+        margin-top: 2rem;
+        text-align: center;
+        padding: 2rem;
     }
 }
 

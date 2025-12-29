@@ -13,6 +13,7 @@ const io = new Server(server, {
             "http://192.168.1.71:5173",
             process.env.FRONTEND_URL
         ].filter(Boolean),
+        credentials: true,
     },
 });
 

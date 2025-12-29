@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 // signup controller
 export const signup = async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, profilePic } = req.body;
     try {
         if (!fullName || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
@@ -26,10 +26,17 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        let profilePicUrl = "";
+        if (profilePic) {
+            const uploadResponse = await cloudinary.uploader.upload(profilePic);
+            profilePicUrl = uploadResponse.secure_url;
+        }
+
         const newUser = await User.create({
             fullName,
             email,
             password: hashedPassword,
+            profilePic: profilePicUrl,
         });
 
         if (newUser) {

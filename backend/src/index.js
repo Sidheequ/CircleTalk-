@@ -10,9 +10,9 @@ import { app, server } from "./lib/socket.js";
 dotenv.config();
 const PORT = process.env.PORT || 5001;
 
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(cookieParser());
+// Trust proxy is required for cookies to work on Render behind a load balancer
+app.set("trust proxy", 1);
+
 app.use(cors(
     {
         credentials: true,
@@ -24,6 +24,10 @@ app.use(cors(
         ].filter(Boolean)
     }
 ));
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
