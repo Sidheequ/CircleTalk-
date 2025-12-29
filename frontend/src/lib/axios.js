@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BASE_API_URL = import.meta.env.VITE_BACKEND_URL || `http://${window.location.hostname}:5001`;
+
 export const axiosInstance = axios.create({
-    baseURL: `http://${window.location.hostname}:5001/api`,
+    baseURL: `${BASE_API_URL}/api`,
     withCredentials: true,
 });
 
