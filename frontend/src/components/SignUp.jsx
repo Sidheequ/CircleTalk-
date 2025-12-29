@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
-import { User, Mail, Lock, Eye, EyeOff, Loader2, MessageSquare } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, Loader2, Camera } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useThemeStore } from '../store/useThemeStore';
 import logoDark from '../assets/CT logo.png';
@@ -12,10 +12,23 @@ const SignUp = () => {
     fullName: '',
     email: '',
     password: '',
+    profilePic: '',
   });
 
   const { signup, isSigningUp } = useAuthStore();
   const { theme } = useThemeStore();
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64Image = reader.result;
+      setFormData({ ...formData, profilePic: base64Image });
+    };
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
