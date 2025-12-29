@@ -103,3 +103,51 @@ export const sendMessage = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+// block/unblock user controller
+export const blockUser = async (req, res) => {
+    try {
+        const { id: userToBlockId } = req.params;
+        const loggedInUserId = req.user._id;
+
+        const user = await User.findById(loggedInUserId);
+        const isBlocked = user.blockedUsers.includes(userToBlockId);
+
+        if (isBlocked) {
+            user.blockedUsers = user.blockedUsers.filter(id => id.toString() !== userToBlockId);
+        } else {
+            user.blockedUsers.push(userToBlockId);
+        }
+
+        await user.save();
+        res.status(200).json({ message: isBlocked ? "User unblocked" : "User blocked" });
+    } catch (error) {
+        console.log("Error in blockUser controller: ", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+// clear messages controller
+export const clearMessages = async (req, res) => {
+    try {
+        const { id: userToChatId } = req.params;
+        const senderId = req.user._id;
+
+        await Message.deleteMany({
+            $or: [
+                { senderId: senderId, receiverId: userToChatId },
+                { senderId: userToChatId, receiverId: senderId },
+            ],
+        });
+
+        res.status(200).json({ message: "Chat cleared successfully" });
+    } catch (error) {
+        console.log("Error in clearMessages controller: ", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+// delete chat controller (currently same logic as clear since conversations are dynamic)
+export const deleteChat = async (req, res) => {
+    return clearMessages(req, res);
+};

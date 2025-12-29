@@ -1,31 +1,37 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    fullName: 
+    fullName:
     {
-    type:String,
-    required:true,
-    
+        type: String,
+        required: true,
+
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    password:{
-        type:String,
-        required:true,
-        minlength:6, 
-        
+    password: {
+        type: String,
+        required: true,
+        minlength: 6,
+
     },
-    profilePic:{
-        type:String,
-        default:"",
-    }
+    profilePic: {
+        type: String,
+        default: "",
+    },
+    blockedUsers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
 },
-{
-    timestamps:true,
-}
+    {
+        timestamps: true,
+    }
 
 );
 

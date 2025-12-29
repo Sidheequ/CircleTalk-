@@ -113,4 +113,38 @@ export const useChatStore = create((set, get) => ({
         const socket = useAuthStore.getState().socket;
         if (socket) socket.off("newMessage");
     },
+
+    blockUser: async (userId) => {
+        try {
+            const res = await axiosInstance.post(`/messages/block/${userId}`);
+            toast.success(res.data.message);
+            // Optionally refresh user data if you want to show block status
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to block user");
+        }
+    },
+
+    clearMessages: async (userId) => {
+        try {
+            await axiosInstance.delete(`/messages/clear/${userId}`);
+            set({ messages: [] });
+            toast.success("Chat cleared");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to clear chat");
+        }
+    },
+
+    deleteChat: async (userId) => {
+        try {
+            await axiosInstance.delete(`/messages/delete/${userId}`);
+            set({
+                messages: [],
+                selectedUser: null,
+                conversations: get().conversations.filter(c => c._id !== userId)
+            });
+            toast.success("Conversation deleted");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to delete conversation");
+        }
+    },
 }));
