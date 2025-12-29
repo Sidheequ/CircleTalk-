@@ -1161,7 +1161,7 @@ input:checked+.slider:before {
 
     .home-page {
         padding: 0;
-        height: calc(100vh - 56px);
+        height: calc(100dvh - 56px);
     }
 
     .dashboard-container {
@@ -1185,7 +1185,7 @@ input:checked+.slider:before {
         top: 56px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 56px);
+        height: calc(100dvh - 56px);
         z-index: 50;
     }
 
@@ -1216,7 +1216,7 @@ input:checked+.slider:before {
     }
 
     .home-page {
-        height: calc(100vh - 56px);
+        height: calc(100dvh - 56px);
     }
 
     .sidebar-header {
@@ -1251,6 +1251,8 @@ input:checked+.slider:before {
     /* Message UI Mobile Tweaks */
     .messages-container {
         padding: 1rem 0.75rem;
+        /* Ensure bottom padding is enough so last message isn't hidden by input */
+        padding-bottom: 80px;
     }
 
     .message-wrapper {
@@ -1270,7 +1272,7 @@ input:checked+.slider:before {
     /* Input Mobile Optimization */
     .chat-input-area {
         padding: 0.5rem 0.75rem;
-        padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+        padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
     }
 
     .input-wrapper {
@@ -1291,7 +1293,7 @@ input:checked+.slider:before {
 
     .auth-card {
         max-width: 100%;
-        min-height: 100vh;
+        min-height: 100dvh;
         border-radius: 0;
         padding: 1.5rem 1.25rem;
         box-shadow: none;
@@ -1307,7 +1309,7 @@ input:checked+.slider:before {
     }
 
     .fab-new-chat {
-        bottom: 1.75rem;
+        bottom: max(1.75rem, env(safe-area-inset-bottom));
         right: 1.25rem;
         width: 60px;
         height: 60px;
