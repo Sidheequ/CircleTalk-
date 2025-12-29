@@ -1284,9 +1284,26 @@ input:checked+.slider:before {
     }
 
     /* Auth Pages Mobile Fix */
+    .auth-container {
+        padding: 0;
+        background-color: var(--sidebar-bg);
+    }
+
     .auth-card {
-        padding: 1rem;
-        padding-top: 2rem;
+        max-width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 1.5rem 1.25rem;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Start from top on mobile */
+        padding-top: 4rem;
+    }
+
+    .auth-logo-wrapper {
+        margin-bottom: 1rem;
     }
 
     .fab-new-chat {
