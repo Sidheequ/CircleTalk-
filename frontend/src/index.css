@@ -580,6 +580,7 @@ main {
     padding: 1rem 1.5rem;
     background: var(--header-bg);
     flex-shrink: 0;
+    position: relative;
     /* Keep input area fixed at bottom */
 }
 
